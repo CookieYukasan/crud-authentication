@@ -19,14 +19,14 @@ class UserController {
     const { token } = await user.tokens().create({
       user_id: user.id,
       token: Encryption.encrypt(user.email),
-      type: 1,
+      type: "confirmemail",
     });
 
     await Mail.send(
       "emails.confirm-email",
       {
         name: data["name"],
-        url_token: `${Env.get("APP_URL")}confirm/${token}`,
+        url_token: `${Env.get("APP_URL")}/confirm/${token}`,
       },
       (message) => {
         message

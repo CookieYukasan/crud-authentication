@@ -17,7 +17,7 @@
 const Route = use("Route");
 
 Route.group(() => {
-  Route.post("/", "UserController.create");
+  Route.post("/", "UserController.create").validator("CreateUser");
 }).prefix("sessions");
 
 Route.group(() => {
