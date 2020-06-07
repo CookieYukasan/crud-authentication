@@ -6,9 +6,13 @@
   </head>
   <body>
     <div class="app">
-      <h1 style="padding-bottom: 10px;">Aura Technology</h1>
-      <h3 style="padding-bottom: 10px;">Obrigado por se registrar ;)</h3>
-      <h2>Confirma seu email clicando no botão abaixo:</h2>
+      <h1>Olá, {{ name }}</h1>
+      <br />
+      <h2>Obrigado por se registrar ;)</h2>
+      <br />
+      <h4>Confirma seu email clicando no botão abaixo ou cole este link no seu navegador ({{ url_token }})</h4>
+
+      <button href="{{ url_token }}">CONFIRMAR EMAIL</button>
     </div>
   </body>
 </html>

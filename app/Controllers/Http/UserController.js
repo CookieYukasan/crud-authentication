@@ -2,6 +2,8 @@
 
 const User = use("App/Models/User");
 const Mail = use("Mail");
+const Env = use("Env");
+const Encryption = use("Encryption");
 
 class UserController {
   async index() {
@@ -14,12 +16,25 @@ class UserController {
     const data = request.only(["name", "email", "password"]);
     const user = await User.create(data);
 
-    await Mail.send("emails.confirm-email", {}, (message) => {
-      message
-        .to(data["email"])
-        .from("no-reply@auratech.com.br", "Aura Bot")
-        .subject("Confirme seu email");
+    const { token } = await user.tokens().create({
+      user_id: user.id,
+      token: Encryption.encrypt(user.email),
+      type: 1,
     });
+
+    await Mail.send(
+      "emails.confirm-email",
+      {
+        name: data["name"],
+        url_token: `${Env.get("APP_URL")}confirm/${token}`,
+      },
+      (message) => {
+        message
+          .to(data["email"])
+          .from("no-reply@cookieyukasan.com.br", "Cookie Yukasan")
+          .subject("Confirme seu email");
+      }
+    );
 
     return response.status(201).json(user);
   }
