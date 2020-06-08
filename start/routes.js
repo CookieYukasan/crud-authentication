@@ -17,7 +17,7 @@
 const Route = use("Route");
 
 Route.group(() => {
-  Route.post("/", "SessionsController.store");
+  Route.get("/", "SessionsController.store").validator("CreateSession");
 }).prefix("sessions");
 
 Route.group(() => {
