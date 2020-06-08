@@ -24,3 +24,7 @@ Route.group(() => {
   Route.get("/", "UserController.index");
   Route.post("/", "UserController.store").validator("CreateUser");
 }).prefix("users");
+
+Route.group(() => {
+  Route.post("/", "ConfirmEmailController.update").validator("ConfirmEmail");
+}).prefix("confirm-email");
