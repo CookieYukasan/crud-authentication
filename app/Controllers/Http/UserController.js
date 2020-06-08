@@ -3,7 +3,8 @@
 const User = use("App/Models/User");
 const Mail = use("Mail");
 const Env = use("Env");
-const Encryption = use("Encryption");
+
+const GenerateToken = use("App/Utils/GenerateToken");
 
 class UserController {
   async index() {
@@ -12,13 +13,13 @@ class UserController {
     return user;
   }
 
-  async create({ request, response }) {
+  async store({ request, response }) {
     const data = request.only(["name", "email", "password"]);
     const user = await User.create(data);
 
     const { token } = await user.tokens().create({
       user_id: user.id,
-      token: Encryption.encrypt(user.email),
+      token: GenerateToken(),
       type: "confirmemail",
     });
 
@@ -26,7 +27,7 @@ class UserController {
       "emails.confirm-email",
       {
         name: data["name"],
-        url_token: `${Env.get("APP_URL")}/confirm/${token}`,
+        url_token: `${Env.get("APP_URL")}/confirm-email/${token}`,
       },
       (message) => {
         message
