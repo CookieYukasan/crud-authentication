@@ -1,5 +1,8 @@
 "use strict";
 
+const Antl = use("Antl");
+Antl.currentLocale();
+
 class CreateUser {
   get rules() {
     return {
@@ -11,12 +14,20 @@ class CreateUser {
 
   get messages() {
     return {
-      "name.required": "You must provide a name.",
-      "name.string": "Your name must contain only letters.",
-      "email.required": "You must provide a email address.",
-      "email.email": "You must provide a valid email address.",
-      "email.unique": "This email is already registered.",
-      "password.required": "You must provide a password.",
+      "name.required": Antl.formatMessage("validators.required", {
+        field: "name",
+      }),
+      "name.string": Antl.formatMessage("validators.string"),
+      "email.required": Antl.formatMessage("validators.required", {
+        field: "email address",
+      }),
+      "email.email": Antl.formatMessage("validators.email"),
+      "email.unique": Antl.formatMessage("validators.unique", {
+        field: "email address",
+      }),
+      "password.required": Antl.formatMessage("validators.required", {
+        field: "password",
+      }),
     };
   }
 }

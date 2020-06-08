@@ -1,5 +1,8 @@
 "use strict";
 
+const Antl = use("Antl");
+Antl.currentLocale();
+
 class CreateSession {
   get rules() {
     return {
@@ -9,9 +12,13 @@ class CreateSession {
 
   get messages() {
     return {
-      "email.required": "You must provide a email address.",
-      "email.email": "You must provide a valid email address.",
-      "email.exists": "You must provide a valid email address.",
+      "email.required": Antl.formatMessage("validators.required", {
+        field: "email address",
+      }),
+      "email.email": Antl.formatMessage("validators.email"),
+      "email.exists": Antl.formatMessage("validators.exists", {
+        field: "email address",
+      }),
     };
   }
 

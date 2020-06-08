@@ -1,5 +1,8 @@
 "use strict";
 
+const Antl = use("Antl");
+Antl.currentLocale();
+
 class ConfirmEmail {
   get rules() {
     return {
@@ -9,8 +12,12 @@ class ConfirmEmail {
 
   get messages() {
     return {
-      "token.required": "You must provide a token.",
-      "token.exists": "You must provide a valid token.",
+      "token.required": Antl.formatMessage("validators.required", {
+        field: "token",
+      }),
+      "token.exists": Antl.formatMessage("validators.exists", {
+        field: "token",
+      }),
     };
   }
 }
