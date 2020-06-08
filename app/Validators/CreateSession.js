@@ -11,7 +11,7 @@ class CreateSession {
     return {
       "email.required": "You must provide a email address.",
       "email.email": "You must provide a valid email address.",
-      "email.exists": "You must provide a valid email address",
+      "email.exists": "You must provide a valid email address.",
     };
   }
 

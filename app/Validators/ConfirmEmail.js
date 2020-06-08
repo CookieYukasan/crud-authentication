@@ -10,7 +10,7 @@ class ConfirmEmail {
   get messages() {
     return {
       "token.required": "You must provide a token.",
-      "token.exists": "You must provide a valid token",
+      "token.exists": "You must provide a valid token.",
     };
   }
 }
