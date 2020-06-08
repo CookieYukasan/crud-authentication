@@ -19,7 +19,7 @@ class UserController {
 
     const { token } = await user.tokens().create({
       user_id: user.id,
-      token: GenerateToken(),
+      token: await GenerateToken(),
       type: "confirmemail",
     });
 
